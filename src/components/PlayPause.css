@@ -1,0 +1,17 @@
+#PlayPause {
+  display: flex;
+  justify-content: space-around;
+}
+
+#PlayPauseButton {
+  padding-left: 20px;
+}
+
+i {
+  cursor: pointer;
+  color: #cc003b;
+}
+
+.fa-repeat {
+  margin: 10px 15px;
+}

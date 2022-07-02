@@ -1,0 +1,21 @@
+#Container {
+  margin: 0px 20px;
+  background-color: #0d0d45;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#Controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#Time {
+  margin: 0px;
+}
+
+i {
+  cursor: pointer;
+  color: #cc003b;
+}
