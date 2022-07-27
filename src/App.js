@@ -108,8 +108,8 @@ function App() {
           <TimerControl label="Work Length" time={workTime} increment={incrementWorkTime} decrement={decrementWorkTime}></TimerControl>
           <TimerControl label="Break Length" time={breakTime} increment={incrementBreakTime} decrement={decrementBreakTime}></TimerControl>
         </div>
-        <Display timeRemaining={timeRemaining}></Display>
-        <PlayPause toggleTimer={toggleTimer} reset={reset}></PlayPause>
+        <Display isBreak={isBreak} timeRemaining={timeRemaining}></Display>
+        <PlayPause timerActive={timerActive} toggleTimer={toggleTimer} reset={reset}></PlayPause>
       </header>
     </div>
   );

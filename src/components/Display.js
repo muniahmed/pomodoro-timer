@@ -11,6 +11,7 @@ function Display(props) {
     }
     return (
         <div id="Display">
+            <p style={{ "fontSize": "24px" }}>{props.isBreak ? "Break" : "Work"}</p>
             <p>{displayTime(props.timeRemaining)}</p>
         </div>
     );
