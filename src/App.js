@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import TimerControl from './components/TimerControl';
-import Display from './components/Display';
-import PlayPause from './components/PlayPause';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import TimerControl from "./components/TimerControl";
+import Display from "./components/Display";
+import PlayPause from "./components/PlayPause";
 
+const endAudio = new Audio(
+  "http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a"
+);
+const startAudio = new Audio(
+  "http://scruss.com/wordpress/wp-content/uploads/2017/10/Original-Log-Commercial_The-Ren-and-Stimpy-Show.wav"
+);
 
 function App() {
-
   const [workTime, setWorkTime] = useState(25);
   const [breakTime, setBreakTime] = useState(5);
   const [timeRemaining, setTimeRemaining] = useState(workTime * 60);
   const [timerActive, setTimerActive] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
-
-
 
   function incrementWorkTime() {
     if (!timerActive) {
@@ -25,11 +28,9 @@ function App() {
     }
   }
 
-
-
   function decrementWorkTime() {
     if (!timerActive) {
-      let newWorkTime = Math.max((workTime - 1), 1);
+      let newWorkTime = Math.max(workTime - 1, 1);
       setWorkTime(newWorkTime);
       if (!isBreak) {
         setTimeRemaining(newWorkTime * 60);
@@ -49,7 +50,7 @@ function App() {
 
   function decrementBreakTime() {
     if (!timerActive) {
-      let newBreakkTime = Math.max((breakTime - 1), 1);
+      let newBreakkTime = Math.max(breakTime - 1, 1);
       setBreakTime(newBreakkTime);
       if (isBreak) {
         setTimeRemaining(newBreakkTime * 60);
@@ -66,22 +67,19 @@ function App() {
 
     if (timerActive) {
       interval = setInterval(() => {
-
         setTimeRemaining((prevTime) => {
           if (timeRemaining === 0) {
             if (!isBreak) {
-              new Audio("http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a").play();
+              endAudio.play();
               setIsBreak(true);
-              return (breakTime * 60);
-
+              return breakTime * 60;
             } else {
-              new Audio("http://scruss.com/wordpress/wp-content/uploads/2017/10/Original-Log-Commercial_The-Ren-and-Stimpy-Show.wav").play();
+              startAudio.play();
               setIsBreak(false);
-              return (workTime * 60);
-
+              return workTime * 60;
             }
           } else {
-            return prevTime - 1
+            return prevTime - 1;
           }
         });
       }, 1000);
@@ -91,7 +89,6 @@ function App() {
     return () => clearInterval(interval);
   }, [timerActive, timeRemaining, isBreak, breakTime, workTime]);
 
-
   function reset() {
     setWorkTime(25);
     setBreakTime(5);
@@ -99,17 +96,30 @@ function App() {
     setTimerActive(false);
   }
 
-
   return (
     <div className="App">
       <header className="App-header">
         <h1>Pomodoro Timer</h1>
         <div id="Controls">
-          <TimerControl label="Work Length" time={workTime} increment={incrementWorkTime} decrement={decrementWorkTime}></TimerControl>
-          <TimerControl label="Break Length" time={breakTime} increment={incrementBreakTime} decrement={decrementBreakTime}></TimerControl>
+          <TimerControl
+            label="Work Length"
+            time={workTime}
+            increment={incrementWorkTime}
+            decrement={decrementWorkTime}
+          ></TimerControl>
+          <TimerControl
+            label="Break Length"
+            time={breakTime}
+            increment={incrementBreakTime}
+            decrement={decrementBreakTime}
+          ></TimerControl>
         </div>
         <Display isBreak={isBreak} timeRemaining={timeRemaining}></Display>
-        <PlayPause timerActive={timerActive} toggleTimer={toggleTimer} reset={reset}></PlayPause>
+        <PlayPause
+          timerActive={timerActive}
+          toggleTimer={toggleTimer}
+          reset={reset}
+        ></PlayPause>
       </header>
     </div>
   );
